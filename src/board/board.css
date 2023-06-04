@@ -1,0 +1,29 @@
+.board {
+    display: grid;
+    grid-template-areas: "to-do in-progress test done";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100vh;
+}
+
+.boardColumn {
+}
+
+#to-do {
+    grid-area: to-do;
+    background-color: aquamarine;
+}
+
+#in-progress {
+    grid-area: in-progress;
+    background-color: goldenrod;
+}
+
+#test {
+    grid-area: test;
+    background-color: gray;
+}
+
+#done {
+    grid-area: done;
+    background-color: green;
+}
