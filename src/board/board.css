@@ -15,8 +15,13 @@
 
 .card {
     background-color: white;
+    padding: 10px;
     height: 100px;
     width: 100%;
+}
+
+.cardText {
+    margin: 0px;
 }
 
 #to-do {
