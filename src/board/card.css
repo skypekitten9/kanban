@@ -42,8 +42,10 @@
 
 .leftButton {
     grid-area: leftButton;
+    align-self: center;
 }
 
 .rightButton {
     grid-area: rightButton;
+    align-self: center;
 }
