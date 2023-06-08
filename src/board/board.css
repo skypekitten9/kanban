@@ -13,33 +13,22 @@
     padding: 10px;
 }
 
-.card {
-    background-color: white;
-    padding: 10px;
-    height: 100px;
-    width: 100%;
-}
-
-.cardText {
-    margin: 0px;
-}
-
 #to-do {
     grid-area: to-do;
-    background-color: aquamarine;
+    background-color: #FFE7CE;
 }
 
 #in-progress {
     grid-area: in-progress;
-    background-color: goldenrod;
+    background-color: #FFCDA8;
 }
 
 #test {
     grid-area: test;
-    background-color: gray;
+    background-color: #FFAAC9;
 }
 
 #done {
     grid-area: done;
-    background-color: green;
+    background-color: #E4A5FF;
 }

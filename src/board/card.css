@@ -1,0 +1,49 @@
+.card {
+    display: grid;
+    grid-template-areas: "title leftButton rightButton" "description description description";
+    grid-template-columns: 5fr 1fr 1fr;
+    grid-template-rows: 1fr 3fr;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    height: 100px;
+    width: 100%;
+}
+
+.cardTitle {
+    grid-area: title;
+    margin: 0px;
+    font-size: 17px;
+}
+
+.cardDescription {
+    grid-area: description;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.cardButton {
+    grid-area: buttons;
+    padding-bottom: 15px;
+    font-size: 10px;
+    width: 30px;
+    height: 15px;
+    border: none;
+    border-radius: 50px;
+}
+
+.cardButton:hover {
+    background-color: gainsboro;
+}
+
+.cardButton:active{
+    background-color:darkgrey;
+}
+
+.leftButton {
+    grid-area: leftButton;
+}
+
+.rightButton {
+    grid-area: rightButton;
+}

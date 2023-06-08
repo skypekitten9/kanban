@@ -1,13 +1,12 @@
 import './board.css'
+import './card.js'
+import Card from './card.js';
 export default function Board() {
     return (
         <div className="board">
             <div className="boardColumn" id='to-do'>
-                <div className='card'>
-                    <p className='cardText'>This is a very long card text to see how it wraps inside the card componenet</p>
-                </div>
-                <div className='card'></div>
-                <div className='card'></div>
+                <Card></Card>
+                <Card></Card>
             </div>
             <div className="boardColumn" id='in-progress'></div>
             <div className="boardColumn" id='test'></div>
