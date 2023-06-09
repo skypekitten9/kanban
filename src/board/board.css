@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: "to-do in-progress test done";
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 100vh;
+    min-height: 100vh;
 }
 
 .boardColumn {
