@@ -4,8 +4,12 @@ export default function Card(){
         <div className="card">
             <p className='cardTitle'>Title Example</p>
             <p className='cardDescription'>This is an example of a descriotion, it's super duper long so I can see how it looks</p>
-            <button className='cardButton leftButton'>←</button>
-            <button className='cardButton rightButton'>→</button>
+            <div className='buttonsDiv'>
+                <button className='cardButton'>🗑️</button>
+                <button className='cardButton'>📝</button>
+                <button className='cardButton'>←</button>
+                <button className='cardButton'>→</button>
+            </div>
         </div>
     );
 }

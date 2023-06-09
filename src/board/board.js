@@ -7,6 +7,7 @@ export default function Board() {
             <div className="boardColumn" id='to-do'>
                 <Card></Card>
                 <Card></Card>
+                <Card></Card>
             </div>
             <div className="boardColumn" id='in-progress'></div>
             <div className="boardColumn" id='test'></div>
