@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: "to-do in-progress test done";
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 .boardColumn {
@@ -11,6 +11,7 @@
     align-content: start;
     gap: 10px;
     padding: 10px;
+    overflow: scroll;
 }
 
 #to-do {
@@ -32,3 +33,5 @@
     grid-area: done;
     background-color: #E4A5FF;
 }
+
+::-webkit-scrollbar {display:none;}
