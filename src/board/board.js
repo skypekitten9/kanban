@@ -66,19 +66,26 @@ export default function Board() {
         setCardList(newCardList)
     };
 
+    const RemoveCard = (cardId) => {
+        var cardIndex = cardList.map(card => { return card.id; }).indexOf(cardId);
+        var newCardList = [...cardList]
+        newCardList.splice(cardIndex, 1)
+        setCardList(newCardList)
+    };
+
     return (
         <div className="board">
             <div className="boardColumn" id='to-do'>
-                {cardList.map(item => {if (item.column == todoColumn){return <Card cardData={item} NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
+                {cardList.map(item => {if (item.column == todoColumn){return <Card cardData={item} NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
             </div>
             <div className="boardColumn" id='in-progress'>
-                {cardList.map(item => {if (item.column == inProgressColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
+                {cardList.map(item => {if (item.column == inProgressColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
             </div>
             <div className="boardColumn" id='test'>
-                {cardList.map(item => {if (item.column == testColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
+                {cardList.map(item => {if (item.column == testColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
             </div>
             <div className="boardColumn" id='done'>
-            {cardList.map(item => {if (item.column == doneColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
+            {cardList.map(item => {if (item.column == doneColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
                 <button onClick={AddCard}>Add card</button>
             </div>
         </div>
