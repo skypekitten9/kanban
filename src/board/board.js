@@ -4,35 +4,81 @@ import './card.js'
 import Card from './card.js';
 
 var idCount = 0;
+const todoColumn = "to-do";
+const inProgressColumn = "in-progress";
+const testColumn = "test";
+const doneColumn = "done";
 function GenerateId(){
     idCount = idCount + 1;
     return idCount;
 }
 
 export default function Board() {
-    const [todoList, setTodoList] = useState([])
-    const [inProgressList, setInProgressList] = useState([])
-    const [testList, setTestList] = useState([])
-    const [doneList, setDoneList] = useState([])
+    const [cardList, setCardList] = useState([])
 
     const AddCard = () => {
         const id = GenerateId()
-        setTodoList([...todoList, {
-            title: "New Title",
+        setCardList([...cardList, {
+            title: "New Title " + id,
             description: "This is a new description from props",
-            id: id}]);
+            id: id,
+            column: todoColumn}]);
         console.log("id: " + id)
+    };
+
+    const NextColumn = (cardId) => {
+        var cardIndex = cardList.map(card => { return card.id; }).indexOf(cardId);
+        console.log(cardId)
+        console.log(cardIndex)
+        const oldColumn = cardList[cardIndex].column
+        var newColumn = "";
+        if(oldColumn == todoColumn){
+            newColumn = inProgressColumn
+        }
+        else if(oldColumn == inProgressColumn){
+            newColumn = testColumn
+        }
+        else{
+            newColumn = doneColumn;
+        }
+        var newCardList = [...cardList]
+        newCardList[cardIndex].column = newColumn
+        setCardList(newCardList)
+    };
+
+    const PreviousColumn = (cardId) => {
+        var cardIndex = cardList.map(card => { return card.id; }).indexOf(cardId);
+        
+        const oldColumn = cardList[cardIndex].column
+        var newColumn = "";
+        if(oldColumn == doneColumn){
+            newColumn = testColumn
+        }
+        else if(oldColumn == testColumn){
+            newColumn = inProgressColumn
+        }
+        else{
+            newColumn = todoColumn;
+        }
+        
+        var newCardList = [...cardList]
+        newCardList[cardIndex].column = newColumn
+        setCardList(newCardList)
     };
 
     return (
         <div className="board">
             <div className="boardColumn" id='to-do'>
-                {todoList.map(item => <Card title={item.title} description={item.description}></Card>)}
+                {cardList.map(item => {if (item.column == todoColumn){return <Card cardData={item} NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
             </div>
-            <div className="boardColumn" id='in-progress'>{inProgressList}</div>
-            <div className="boardColumn" id='test'>{testList}</div>
+            <div className="boardColumn" id='in-progress'>
+                {cardList.map(item => {if (item.column == inProgressColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
+            </div>
+            <div className="boardColumn" id='test'>
+                {cardList.map(item => {if (item.column == testColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
+            </div>
             <div className="boardColumn" id='done'>
-                {doneList}
+            {cardList.map(item => {if (item.column == doneColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} key={item.id}></Card>}})}
                 <button onClick={AddCard}>Add card</button>
             </div>
         </div>
