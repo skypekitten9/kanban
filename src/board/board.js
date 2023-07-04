@@ -75,6 +75,11 @@ export default function Board() {
 
     return (
         <div className="board">
+            <div className="overlay">
+                <div className="cardTailor">
+                    
+                </div>
+            </div>
             <div className="boardColumn" id='to-do'>
                 {cardList.map(item => {if (item.column == todoColumn){return <Card cardData={item} NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
             </div>
