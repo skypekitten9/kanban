@@ -77,7 +77,12 @@ export default function Board() {
         <div className="board">
             <div className="overlay">
                 <div className="cardTailor">
-                    
+                    <textarea id="overlayTitle" placeholder="New card title"></textarea>
+                    <textarea id="overlayDescription" placeholder="Description for my new card, hope I finish this card in time!"></textarea>
+                    <div className='buttonsDiv'>
+                        <button className='overlayButton cancel'></button>
+                        <button className='overlayButton accept'></button>
+                    </div>
                 </div>
             </div>
             <div className="boardColumn" id='to-do'>

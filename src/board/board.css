@@ -15,6 +15,7 @@
 }
 
 .overlay{
+    visibility: visable;
     background-color: rgba(0,0,0, 0.2);
     display: flex;
     justify-content: center;
@@ -23,12 +24,53 @@
     width: 100vw;
 }
 
+.overlayButton {
+    padding-bottom: 15px;
+    margin-right: 3px;
+    font-size: 10px;
+    width: 30px;
+    height: 15px;
+    border: none;
+    border-radius: 50px;
+}
+
+.accept{
+    background-color: #A7E99C;
+}
+
+.cancel{
+    background-color: #FF8986;
+}
+
+.buttonsDiv {
+    grid-area: buttons;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.accept:hover {
+    background-color: #BFEEB7;
+}
+
+.accept:active{
+    background-color: #8FE381;
+}
+
+.cancel:hover {
+    background-color: #FF9997;
+}
+
+.cancel:active{
+    background-color:#FF7974;
+}
+
 .cardTailor{
     display: grid;
     grid-template-areas: "title" 
                          "description" 
                          "buttons";
-    grid-template-rows: 2fr 4fr 1fr;
+    grid-template-rows: 3fr 12fr 1fr;
     background-color: white;
     border-radius: 10px;
     padding: 15px;
@@ -55,6 +97,34 @@
 #done {
     grid-area: done;
     background-color: #E4A5FF;
+}
+
+textarea {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    border-color: rgb(245, 245, 245);;
+    background-color: rgb(245, 245, 245);
+    padding: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#overlayTitle{
+    font-size: 20px;
+}
+
+textarea:focus {
+    outline: none;
+    background-color: rgb(240, 240, 240);
+}
+
+textarea:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+textarea::placeholder{
+    color:rgb(150, 150, 150);
+
 }
 
 ::-webkit-scrollbar {display:none;}
