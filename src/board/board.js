@@ -15,10 +15,12 @@ function GenerateId(){
 
 function CloseOverlay(){
     document.getElementById("overlay").style.visibility = "hidden"
+    document.getElementById("addCardButton").style.visibility = "visible"
 }
 
 function OpenOverlay(){
     document.getElementById("overlay").style.visibility = "visible"
+    document.getElementById("addCardButton").style.visibility = "hidden"
 }
 
 export default function Board() {
