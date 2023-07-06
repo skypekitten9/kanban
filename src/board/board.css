@@ -14,8 +14,8 @@
     overflow: scroll;
 }
 
-.overlay{
-    visibility: visable;
+#overlay{
+    visibility: hidden;
     background-color: rgba(0,0,0, 0.2);
     display: flex;
     justify-content: center;
@@ -34,11 +34,11 @@
     border-radius: 50px;
 }
 
-.accept{
+#accept{
     background-color: #A7E99C;
 }
 
-.cancel{
+#cancel{
     background-color: #FF8986;
 }
 
@@ -49,19 +49,19 @@
     justify-content: right;
 }
 
-.accept:hover {
+#accept:hover {
     background-color: #BFEEB7;
 }
 
-.accept:active{
+#accept:active{
     background-color: #8FE381;
 }
 
-.cancel:hover {
+#cancel:hover {
     background-color: #FF9997;
 }
 
-.cancel:active{
+#cancel:active{
     background-color:#FF7974;
 }
 
@@ -125,6 +125,31 @@ textarea:hover{
 textarea::placeholder{
     color:rgb(150, 150, 150);
 
+}
+
+#addCardButton {
+    position: absolute;
+    opacity: 0.5;
+    bottom: 0;
+    right: 0;
+    padding-top: 3px;
+    padding-bottom: 15px;
+    margin: 7px;
+    font-size: 10px;
+    width: 30px;
+    height: 15px;
+    border: none;
+    border-radius: 50px;
+    align-self: center;
+    background-color: white;
+}
+
+#addCardButton:hover {
+    opacity: 1;
+}
+
+#addCardButton:active{
+    background-color: gainsboro;
 }
 
 ::-webkit-scrollbar {display:none;}

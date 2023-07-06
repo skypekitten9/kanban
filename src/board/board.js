@@ -13,10 +13,19 @@ function GenerateId(){
     return idCount;
 }
 
+function CloseOverlay(){
+    document.getElementById("overlay").style.visibility = "hidden"
+}
+
+function OpenOverlay(){
+    document.getElementById("overlay").style.visibility = "visible"
+}
+
 export default function Board() {
     const [cardList, setCardList] = useState([])
 
     const AddCard = () => {
+        CloseOverlay()
         const id = GenerateId()
         setCardList([...cardList, {
             title: "New Title " + id,
@@ -41,8 +50,12 @@ export default function Board() {
         else{
             newColumn = doneColumn;
         }
+
         var newCardList = [...cardList]
-        newCardList[cardIndex].column = newColumn
+        var updatedCard = newCardList[cardIndex]
+        newCardList.splice(cardIndex, 1)
+        updatedCard.column = newColumn
+        newCardList.push(updatedCard)
         setCardList(newCardList)
     };
 
@@ -60,9 +73,12 @@ export default function Board() {
         else{
             newColumn = todoColumn;
         }
-        
+
         var newCardList = [...cardList]
-        newCardList[cardIndex].column = newColumn
+        var updatedCard = newCardList[cardIndex]
+        newCardList.splice(cardIndex, 1)
+        updatedCard.column = newColumn
+        newCardList.push(updatedCard)
         setCardList(newCardList)
     };
 
@@ -75,13 +91,13 @@ export default function Board() {
 
     return (
         <div className="board">
-            <div className="overlay">
+            <div id="overlay">
                 <div className="cardTailor">
                     <textarea id="overlayTitle" placeholder="New card title"></textarea>
                     <textarea id="overlayDescription" placeholder="Description for my new card, hope I finish this card in time!"></textarea>
                     <div className='buttonsDiv'>
-                        <button className='overlayButton cancel'></button>
-                        <button className='overlayButton accept'></button>
+                        <button className='overlayButton' id='cancel' onClick={CloseOverlay}></button>
+                        <button className='overlayButton' id='accept' onClick={AddCard}></button>
                     </div>
                 </div>
             </div>
@@ -96,8 +112,9 @@ export default function Board() {
             </div>
             <div className="boardColumn" id='done'>
             {cardList.map(item => {if (item.column == doneColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
-                <button onClick={AddCard}>Add card</button>
             </div>
+            <button id='addCardButton' onClick={OpenOverlay}>+</button>
         </div>
+        
     );
 }
