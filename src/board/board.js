@@ -21,6 +21,7 @@ function CloseOverlay(){
 }
 
 export default function Board() {
+    console.log("Init board...")
     const [cardList, setCardList] = useState([])
     const titleRef = useRef(null)
     const descriptionRef = useRef(null)
