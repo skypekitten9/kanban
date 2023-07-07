@@ -20,6 +20,8 @@ function CloseOverlay(){
 }
 
 function OpenOverlay(){
+    document.getElementById("overlayTitle").value = ""
+    document.getElementById("overlayDescription").value = ""
     document.getElementById("overlay").style.visibility = "visible"
     document.getElementById("addCardButton").style.visibility = "hidden"
 }
