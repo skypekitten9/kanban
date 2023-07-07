@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './board.css'
 import './card.js'
 import Card from './card.js';
+import userEvent from '@testing-library/user-event';
 
 var idCount = 0;
 const todoColumn = "to-do";
@@ -25,13 +26,26 @@ function OpenOverlay(){
 
 export default function Board() {
     const [cardList, setCardList] = useState([])
+    const titleRef = useRef(null)
+    const descriptionRef = useRef(null)
 
-    const AddCard = () => {
+    const AddCard = (id = null, column = todoColumn) => {
+        id = "3"
         CloseOverlay()
-        const id = GenerateId()
+        var title = titleRef.current.value
+        var description = descriptionRef.current.value
+        if(title == ""){
+            title = "Untitled card"
+        }
+        if(description == ""){
+            description = "Looks like you forgot to add a description to your card, press the pen & paper icon to edit your card."
+        }
+        if(typeof id != 'number'){
+            id = GenerateId()
+        }
         setCardList([...cardList, {
-            title: "New Title " + id,
-            description: "This is a new description from props",
+            title: title,
+            description: description,
             id: id,
             column: todoColumn}]);
         console.log("id: " + id)
@@ -95,8 +109,8 @@ export default function Board() {
         <div className="board">
             <div id="overlay">
                 <div className="cardTailor">
-                    <textarea id="overlayTitle" placeholder="New card title"></textarea>
-                    <textarea id="overlayDescription" placeholder="Description for my new card, hope I finish this card in time!"></textarea>
+                    <textarea id="overlayTitle" ref={titleRef} placeholder="New card title"></textarea>
+                    <textarea id="overlayDescription" ref={descriptionRef} placeholder="Description for my new card, hope I finish this card in time!"></textarea>
                     <div className='buttonsDiv'>
                         <button className='overlayButton' id='cancel' onClick={CloseOverlay}></button>
                         <button className='overlayButton' id='accept' onClick={AddCard}></button>
