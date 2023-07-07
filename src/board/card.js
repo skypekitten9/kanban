@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './card.css'
-export default function Card({cardData, NextColumn, PreviousColumn, RemoveCard}){
+export default function Card({cardData, NextColumn, PreviousColumn, RemoveCard, OpenOverlay}){
     var cardId;
     cardId = cardData.id
     return (
@@ -9,7 +9,7 @@ export default function Card({cardData, NextColumn, PreviousColumn, RemoveCard})
             <p className='cardDescription'>{cardData.description}</p>
             <div className='buttonsDiv'>
                 <button className='cardButton' onClick={() => RemoveCard(cardId)}>🗑️</button>
-                <button className='cardButton'>📝</button>
+                <button className='cardButton' onClick={() => OpenOverlay(cardId)}>📝</button>
                 <button className='cardButton' onClick={() => PreviousColumn(cardId)}>←</button>
                 <button className='cardButton' onClick={() => NextColumn(cardId)}>→</button>
             </div>

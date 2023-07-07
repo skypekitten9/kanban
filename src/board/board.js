@@ -5,6 +5,7 @@ import Card from './card.js';
 import userEvent from '@testing-library/user-event';
 
 var idCount = 0;
+var currentCardInEdit = null;
 const todoColumn = "to-do";
 const inProgressColumn = "in-progress";
 const testColumn = "test";
@@ -19,20 +20,28 @@ function CloseOverlay(){
     document.getElementById("addCardButton").style.visibility = "visible"
 }
 
-function OpenOverlay(){
-    document.getElementById("overlayTitle").value = ""
-    document.getElementById("overlayDescription").value = ""
-    document.getElementById("overlay").style.visibility = "visible"
-    document.getElementById("addCardButton").style.visibility = "hidden"
-}
-
 export default function Board() {
     const [cardList, setCardList] = useState([])
     const titleRef = useRef(null)
     const descriptionRef = useRef(null)
 
-    const AddCard = (id = null, column = todoColumn) => {
-        id = "3"
+    const OpenOverlay = (cardId = null) =>{
+        currentCardInEdit = cardId;
+        console.log(currentCardInEdit)
+        if( typeof currentCardInEdit == 'number'){
+            var cardIndex = cardList.map(card => { return card.id; }).indexOf(cardId);
+            document.getElementById("overlayTitle").value = cardList[cardIndex].title
+            document.getElementById("overlayDescription").value = cardList[cardIndex].description
+        }
+        else{
+            document.getElementById("overlayTitle").value = ""
+            document.getElementById("overlayDescription").value = ""
+        }
+        document.getElementById("overlay").style.visibility = "visible"
+        document.getElementById("addCardButton").style.visibility = "hidden"
+    }
+
+    const AddCard = () => {
         CloseOverlay()
         var title = titleRef.current.value
         var description = descriptionRef.current.value
@@ -42,15 +51,22 @@ export default function Board() {
         if(description == ""){
             description = "Looks like you forgot to add a description to your card, press the pen & paper icon to edit your card."
         }
-        if(typeof id != 'number'){
-            id = GenerateId()
+
+        if(typeof currentCardInEdit != 'number'){
+            const id = GenerateId()
+            setCardList([...cardList, {
+                title: title,
+                description: description,
+                id: id,
+                column: todoColumn}]);
         }
-        setCardList([...cardList, {
-            title: title,
-            description: description,
-            id: id,
-            column: todoColumn}]);
-        console.log("id: " + id)
+        else{
+            var newCardList = [...cardList]
+            var cardIndex = cardList.map(card => { return card.id; }).indexOf(currentCardInEdit);
+            newCardList[cardIndex].title = title
+            newCardList[cardIndex].description = description
+            setCardList(newCardList)
+        }
     };
 
     const NextColumn = (cardId) => {
@@ -120,16 +136,16 @@ export default function Board() {
                 </div>
             </div>
             <div className="boardColumn" id='to-do'>
-                {cardList.map(item => {if (item.column == todoColumn){return <Card cardData={item} NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
+                {cardList.map(item => {if (item.column == todoColumn){return <Card cardData={item} NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} OpenOverlay={OpenOverlay} key={item.id}></Card>}})}
             </div>
             <div className="boardColumn" id='in-progress'>
-                {cardList.map(item => {if (item.column == inProgressColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
+                {cardList.map(item => {if (item.column == inProgressColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} OpenOverlay={OpenOverlay} key={item.id}></Card>}})}
             </div>
             <div className="boardColumn" id='test'>
-                {cardList.map(item => {if (item.column == testColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
+                {cardList.map(item => {if (item.column == testColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} OpenOverlay={OpenOverlay} key={item.id}></Card>}})}
             </div>
             <div className="boardColumn" id='done'>
-            {cardList.map(item => {if (item.column == doneColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} key={item.id}></Card>}})}
+            {cardList.map(item => {if (item.column == doneColumn){return <Card cardData={item}  NextColumn={NextColumn} PreviousColumn={PreviousColumn} RemoveCard={RemoveCard} OpenOverlay={OpenOverlay} key={item.id}></Card>}})}
             </div>
             <button id='addCardButton' onClick={OpenOverlay}>+</button>
         </div>
